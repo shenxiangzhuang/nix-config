@@ -98,8 +98,17 @@
   # git 相关配置
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "Xiangzhuang Shen";
     userEmail = "datahonor@gmail.com";
+    aliases = {
+      ci = "commit";
+      co = "checkout";
+      s = "status";
+    };
+    extraConfig = {
+      push = { autoSetupRemote = true; };
+    };
   };
 
   # 启用 starship，这是一个漂亮的 shell 提示符
