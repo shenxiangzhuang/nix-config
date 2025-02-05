@@ -141,6 +141,10 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
+    shellAliases = {
+      proxyon = "export http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891";
+      proxyoff = "unset http_proxy https_proxy all_proxy";
+    };
     # TODO 在这里添加你的自定义 bashrc 内容
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
