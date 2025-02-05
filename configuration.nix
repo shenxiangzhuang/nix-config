@@ -66,6 +66,12 @@
     };
   };
   
+  systemd.sleep.extraConfig = ''
+  AllowSuspend=no
+  AllowHibernation=no
+  AllowHybridSleep=no
+  AllowSuspendThenHibernate=no
+  '';
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
