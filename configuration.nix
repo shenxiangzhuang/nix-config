@@ -35,10 +35,29 @@
   # 将默认编辑器设置为 vim
   environment.variables.EDITOR = "vim";
 
+  # 启用 Fcitx5 输入法框架
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-rime # Rime 输入法引擎
+      fcitx5-gtk             # alternatively, kdePackages.fcitx5-qt
+      fcitx5-chinese-addons  # table input method support
+      fcitx5-nord            # a color theme
+    ];
+  };
+
+  # 环境变量配置
+  environment.variables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+  };
+
   # 字体设置  
   fonts.packages = with pkgs; [
-  fira-code
-  # 其他你喜欢的字体
+    fira-code
+    noto-fonts-cjk-sans
+    # 其他你喜欢的字体
   ];
 
   # 新增用户
