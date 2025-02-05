@@ -31,8 +31,6 @@
     # 这里从 helix 这个 inputs 数据源安装了 helix 程序
     #inputs.helix.packages."${pkgs.system}".helix
 
-    # 电源配置用到
-    pkgs.dconf
   ];
   # 将默认编辑器设置为 vim
   environment.variables.EDITOR = "vim";
@@ -68,46 +66,6 @@
     };
   };
   
-  # -------------------------------------------
-  # 电源管理设置（禁用休眠和睡眠）
-  # -------------------------------------------
-  # 关闭系统休眠（Hibernate）功能
-  boot.kernelParams = [ "nohibernate" ];
-
-  # 禁用挂起（Suspend）和休眠（Hibernate）
-  services.logind = {
-    lidSwitch = "ignore";              # 合盖不执行任何操作（笔记本）
-    lidSwitchExternalPower = "ignore"; # 外接电源时合盖不操作
-    extraConfig = ''
-      HandlePowerKey=ignore   # 按电源键不操作
-      HandleSuspendKey=ignore # 禁用挂起按键
-      HandleHibernateKey=ignore
-      IdleAction=ignore       # 空闲时不执行任何动作
-      IdleActionSec=0
-    '';
-  };
-
-  # -------------------------------------------
-  # X11 桌面环境设置（通用熄屏配置）
-  # -------------------------------------------
-  services.xserver = {
-    enable = true;
-    
-    # 禁用屏幕保护及自动熄屏（适用于非桌面环境管理的情况）
-    serverFlagsSection = ''
-      Option "BlankTime" "0"    # 关闭屏幕时间（0=永不）
-      Option "StandbyTime" "0"  # 待机时间
-      Option "SuspendTime" "0"  # 挂起时间
-      Option "OffTime" "0"      # 关闭屏幕
-    '';
-  };
-
-  # -------------------------------------------
-  # 桌面环境特定配置（根据实际使用选择）
-  # -------------------------------------------
-  # 配置 GNOME 的电源管理
-  services.xserver.displayManager.gdm.autoSuspend = false;
-
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
